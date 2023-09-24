@@ -133,7 +133,16 @@ def recombine(target_matrix_sizes: Tuple[int, int, int],
   base_tensor_shape = tuple(v.shape[0] for v in base_factors)
   base_a, base_b, base_c = _tensor_shape_to_matrix_sizes(base_tensor_shape)
 
+  print("Base rank: ", base_rank)
+  print("Base tensor shape: ", base_tensor_shape)
+  print("base_a: ", base_a)
+  print("base_b: ", base_b)
+  print("base_c: ", base_c)
+
   u, v, w = _factorization_2d_to_3d(base_factors)
+  print("u: ", u)
+  print("v: ", v)
+  print("w: ", w)
   # The matrix multiplication tensor T_{a, b, c} by convention represents the
   # operation (A, B) -> (AB)^T, i.e. with an additional transposition. Here we
   # will work with the non-transposed version for simplicity.
@@ -150,6 +159,7 @@ def recombine(target_matrix_sizes: Tuple[int, int, int],
   for allocation_a in _block_fillings(base_a, target_a):
     for allocation_b in _block_fillings(base_b, target_b):
       for allocation_c in _block_fillings(base_c, target_c):
+        # print(allocation_a, allocation_b, allocation_c)
         total_rank = 0
         small_matrix_sizes = []
         for r in range(base_rank):

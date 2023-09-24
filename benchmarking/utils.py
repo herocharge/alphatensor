@@ -100,7 +100,7 @@ def algorithm_from_factors(
               right = curr
             else:
               right += curr
-
+      # print(right)
       matrix_product = left @ right
 
       for i in range(n):
@@ -164,6 +164,7 @@ def _get_baseline_op(matrix_dims: Tuple[int, int, int],
     c = full_b
     for _ in range(n_repeat):
       c = jnp.dot(full_a, c)
+      # c = np.matmul(full_a, c)
     c.block_until_ready()
 
   return _vanilla_single_timing
